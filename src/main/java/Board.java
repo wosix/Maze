@@ -1,5 +1,5 @@
 public class Board {
-    static String lab = "########################################\n" +
+    static String lab = "########################################\n" + // length - 860
             "#S.##..#.....###.................##....#\n" +
             "##.#.....#.#...#.######.###..###.#..####\n" +
             "#..#.###.#.#.###.#....###.##.#.........#\n" +
@@ -21,11 +21,11 @@ public class Board {
             "#..........#.....#.#.........#...#....K#\n" +
             "########################################";
 
-    static char[][] chaLab = new char[21][41];
+    static char[][] chaLab = new char[21][41];    // length - 861
 
     boolean[][] booLab = new boolean[21][41];
 
-    public static void main(String[] args) {
+    public Board() {
         int a = 0;
         for (int i = 0; i < 21; i++) {
             for (int j = 0; j < 41; j++) {
@@ -36,21 +36,26 @@ public class Board {
                 a++;
             }
         }
-        System.out.println(lab.length() + " | " + 41 * 21);
-        System.out.println("########################################\n".length());
-        System.out.println(lab.charAt(0));
-        System.out.println(lab.charAt(39));
-        System.out.println(lab.charAt(40));
-        System.out.println(lab.charAt(41));
-        System.out.println(chaLab[2][2]);
+    }
 
-        //System.out.println(chaLab[2][2]);
-
-        for (int i = 0; i < chaLab.length; i++) {
-            for (int j = 0; j < chaLab[1].length; j++) {
-                System.out.print(chaLab[i][j]);
+    public void boolBoard() {
+        for (int i = 0; i < 21; i++) {
+            for (int j = 0; i < 41; j++) {
+                if (chaLab[i][j] == '#') {
+                    booLab[i][j] = true;
+                } else {
+                    booLab[i][j] = false;
+                }
             }
-            System.out.println();
         }
+    }
+
+    public char[][] getMaze() {
+        return chaLab;
+    }
+
+    public boolean[][] getBooLab() {
+        boolBoard();
+        return booLab;
     }
 }
