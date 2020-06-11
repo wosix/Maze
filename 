@@ -1,0 +1,199 @@
+[33mcommit d2b270d001f6caa5105c4491c2637882ff73c958[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Wojciech W <wojtekkk00@o2.pl>
+Date:   Tue Jun 9 00:41:25 2020 +0200
+
+    New Features :p
+
+[1mdiff --git a/README.md b/README.md[m
+[1mnew file mode 100644[m
+[1mindex 0000000..bf57c95[m
+[1m--- /dev/null[m
+[1m+++ b/README.md[m
+[36m@@ -0,0 +1 @@[m
+[32m+[m[32m# Maze[m
+[1mdiff --git a/src/main/java/Board.java b/src/main/java/Board.java[m
+[1mindex d7a1318..7201101 100644[m
+[1m--- a/src/main/java/Board.java[m
+[1m+++ b/src/main/java/Board.java[m
+[36m@@ -1,5 +1,5 @@[m
+ public class Board {[m
+[31m-    static String lab = "########################################\n" +[m
+[32m+[m[32m    static String lab = "########################################\n" + // length - 860[m
+             "#S.##..#.....###.................##....#\n" +[m
+             "##.#.....#.#...#.######.###..###.#..####\n" +[m
+             "#..#.###.#.#.###.#....###.##.#.........#\n" +[m
+[36m@@ -21,11 +21,11 @@[m [mpublic class Board {[m
+             "#..........#.....#.#.........#...#....K#\n" +[m
+             "########################################";[m
+ [m
+[31m-    static char[][] chaLab = new char[21][41];[m
+[32m+[m[32m    static char[][] chaLab = new char[21][41];    // length - 861[m
+ [m
+     boolean[][] booLab = new boolean[21][41];[m
+ [m
+[31m-    public static void main(String[] args) {[m
+[32m+[m[32m    public Board() {[m
+         int a = 0;[m
+         for (int i = 0; i < 21; i++) {[m
+             for (int j = 0; j < 41; j++) {[m
+[36m@@ -36,21 +36,26 @@[m [mpublic class Board {[m
+                 a++;[m
+             }[m
+         }[m
+[31m-        System.out.println(lab.length() + " | " + 41 * 21);[m
+[31m-        System.out.println("########################################\n".length());[m
+[31m-        System.out.println(lab.charAt(0));[m
+[31m-        System.out.println(lab.charAt(39));[m
+[31m-        System.out.println(lab.charAt(40));[m
+[31m-        System.out.println(lab.charAt(41));[m
+[31m-        System.out.println(chaLab[2][2]);[m
+[31m-[m
+[31m-        //System.out.println(chaLab[2][2]);[m
+[32m+[m[32m    }[m
+ [m
+[31m-        for (int i = 0; i < chaLab.length; i++) {[m
+[31m-            for (int j = 0; j < chaLab[1].length; j++) {[m
+[31m-                System.out.print(chaLab[i][j]);[m
+[32m+[m[32m    public void boolBoard() {[m
+[32m+[m[32m        for (int i = 0; i < 21; i++) {[m
+[32m+[m[32m            for (int j = 0; i < 41; j++) {[m
+[32m+[m[32m                if (chaLab[i][j] == '#') {[m
+[32m+[m[32m                    booLab[i][j] = true;[m
+[32m+[m[32m                } else {[m
+[32m+[m[32m                    booLab[i][j] = false;[m
+[32m+[m[32m                }[m
+             }[m
+[31m-            System.out.println();[m
+         }[m
+     }[m
+[32m+[m
+[32m+[m[32m    public char[][] getMaze() {[m
+[32m+[m[32m        return chaLab;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public boolean[][] getBooLab() {[m
+[32m+[m[32m        boolBoard();[m
+[32m+[m[32m        return booLab;[m
+[32m+[m[32m    }[m
+ }[m
+[1mdiff --git a/src/main/java/Main.java b/src/main/java/Main.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..7046417[m
+[1m--- /dev/null[m
+[1m+++ b/src/main/java/Main.java[m
+[36m@@ -0,0 +1,2 @@[m
+[32m+[m[32mpublic class Main {[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/main/java/Walk.java b/src/main/java/Walk.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..bd85bab[m
+[1m--- /dev/null[m
+[1m+++ b/src/main/java/Walk.java[m
+[36m@@ -0,0 +1,25 @@[m
+[32m+[m[32mimport java.util.Scanner;[m
+[32m+[m
+[32m+[m[32mpublic class Walk {[m
+[32m+[m
+[32m+[m[32m    private Scanner scanner;[m
+[32m+[m[32m    private Board chaLab;[m
+[32m+[m
+[32m+[m[32m    public Walk() {[m
+[32m+[m[32m        this.scanner = new Scanner(System.in);[m
+[32m+[m[32m        this.chaLab = new Board();[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    private void printBoard(){[m
+[32m+[m[32m        char[][] chaLab = this.chaLab.getMaze();[m
+[32m+[m[32m        for (int i = 0; i < chaLab.length; i++) {[m
+[32m+[m[32m            for (int j = 0; j < chaLab[1].length; j++) {[m
+[32m+[m[32m                System.out.print(chaLab[i][j]);[m
+[32m+[m[32m            }[m
+[32m+[m[32m            System.out.println();[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+
+[33mcommit bbd4d91b53bf3820e2478cb497eef366d7d7d40d[m
+Author: Wojciech W <wojtekkk00@o2.pl>
+Date:   Mon Jun 8 23:38:45 2020 +0200
+
+    Start
+
+[1mdiff --git a/.idea/.gitignore b/.idea/.gitignore[m
+[1mnew file mode 100644[m
+[1mindex 0000000..26d3352[m
+[1m--- /dev/null[m
+[1m+++ b/.idea/.gitignore[m
+[36m@@ -0,0 +1,3 @@[m
+[32m+[m[32m# Default ignored files[m
+[32m+[m[32m/shelf/[m
+[32m+[m[32m/workspace.xml[m
+[1mdiff --git a/.idea/compiler.xml b/.idea/compiler.xml[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4f7f382[m
+[1m--- /dev/null[m
+[1m+++ b/.idea/compiler.xml[m
+[36m@@ -0,0 +1,13 @@[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8"?>[m
+[32m+[m[32m<project version="4">[m
+[32m+[m[32m  <component name="CompilerConfiguration">[m
+[32m+[m[32m    <annotationProcessing>[m
+[32m+[m[32m      <profile name="Maven default annotation processors profile" enabled="true">[m
+[32m+[m[32m        <sourceOutputDir name="target/generated-sources/annotations" />[m
+[32m+[m[32m        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />[m
+[32m+[m[32m        <outputRelativeToContentRoot value="true" />[m
+[32m+[m[32m        <module name="Maze" />[m
+[32m+[m[32m      </profile>[m
+[32m+[m[32m    </annotationProcessing>[m
+[32m+[m[32m  </component>[m
+[32m+[m[32m</project>[m
+\ No newline at end of file[m
+[1mdiff --git a/.idea/encodings.xml b/.idea/encodings.xml[m
+[1mnew file mode 100644[m
+[1mindex 0000000..aa00ffa[m
+[1m--- /dev/null[m
+[1m+++ b/.idea/encodings.xml[m
+[36m@@ -0,0 +1,7 @@[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8"?>[m
+[32m+[m[32m<project version="4">[m
+[32m+[m[32m  <component name="Encoding">[m
+[32m+[m[32m    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />[m
+[32m+[m[32m    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />[m
+[32m+[m[32m  </component>[m
+[32m+[m[32m</project>[m
+\ No newline at end of file[m
+[1mdiff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml[m
+[1mnew file mode 100644[m
+[1mindex 0000000..712ab9d[m
+[1m--- /dev/null[m
+[1m+++ b/.idea/jarRepositories.xml[m
+[36m@@ -0,0 +1,20 @@[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8"?>[m
+[32m+[m[32m<project version="4">[m
+[32m+[m[32m  <component name="RemoteRepositoriesConfiguration">[m
+[32m+[m[32m    <remote-repository>[m
+[32m+[m[32m      <option name="id" value="central" />[m
+[32m+[m[32m      <option name="name" value="Central Repository" />[m
+[32m+[m[32m      <option name="url" value="https://repo.maven.apache.org/maven2" />[m
+[32m+[m[32m    </remote-repository>[m
+[32m+[m[32m    <remote-repository>[m
+[32m+[m[32m      <option name="id" value="central" />[m
+[32m+[m[32m      <option name="name" value="Maven Central repository" />[m
+[32m+[m[32m      <option name="url" value="https://repo1.maven.org/maven2" />[m
+[32m+[m[32m    </remote-repository>[m
+[32m+[m[32m    <remote-repository>[m
+[32m+[m[32m      <option name="id" value="jboss.community" />[m
+[32m+[m[32m      <option name="name" value="JBoss Community repository" />[m
+[32m+[m[32m      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />[m
+[32m+[m[32m    </remote-repository>[m
+[32m+[m[32m  </component>[m
+[32m+[m[32m</project>[m
+\ No newline at end of file[m
+[1mdiff --git a/.idea/misc.xml b/.idea/misc.xml[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d24ea8e[m
+[1m--- /dev/null[m
+[1m+++ b/.idea/misc.

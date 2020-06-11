@@ -21,9 +21,9 @@ public class Board {
             "#..........#.....#.#.........#...#....K#\n" +
             "########################################";
 
-    static char[][] chaLab = new char[21][41];    // length - 861
+    static char[][] chaLab = new char[21][40];    // length - 861
 
-    boolean[][] booLab = new boolean[21][41];
+    boolean[][] booLab = new boolean[21][40];
 
     public Board() {
         int a = 0;
@@ -39,8 +39,8 @@ public class Board {
     }
 
     public void boolBoard() {
-        for (int i = 0; i < 21; i++) {
-            for (int j = 0; i < 41; j++) {
+        for (int i = 0; i < chaLab.length; i++) {
+            for (int j = 0; j < chaLab[1].length; j++) {
                 if (chaLab[i][j] == '#') {
                     booLab[i][j] = true;
                 } else {
@@ -57,5 +57,18 @@ public class Board {
     public boolean[][] getBooLab() {
         boolBoard();
         return booLab;
+    }
+
+    public static void main(String[] args) {
+        Board board = new Board();
+        boolean[][] test = board.getBooLab();
+
+        for (int i = 0; i < test.length; i++) {
+            for (int j = 0; j < test[1].length; j++) {
+                System.out.print(" '"+test[i][j]+ "'");
+            }
+            System.out.println();
+        }
+        System.out.println("########################################".length());
     }
 }
